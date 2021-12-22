@@ -5,7 +5,7 @@ public class SnakeGame {
         
         //Setup window settings
         JFrame frame = new JFrame();
-        frame.setBounds(0, 0, 1000, 750);
+        frame.setBounds(0, 0, 1006, 760);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
