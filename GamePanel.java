@@ -8,6 +8,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     Timer timer = new Timer(1000 / framerate, this); //Set framerate (1000 = 1 frame/second)
 
     Player player = new Player(0, 0, 0, 25, 3);
+    Apple apple = new Apple(25);
 
     public GamePanel() {
     }
@@ -31,6 +32,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
         //Game logic
         player.playerLogic();
+        player.length = apple.collision(player.headx, player.heady, player.length);
 
         //Repaints screen (calls paint method)
         repaint();
@@ -55,6 +57,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         for (int i = 0; i < player.length; i++) {
             g.fillRect(player.bodyx[i], player.bodyy[i], player.width, player.width);
         }
+
+        //Apple
+        g.setColor(Color.blue);
+        g.fillRect((int)apple.x, (int)apple.y, apple.width, apple.width);
+
     }
 
     /*
