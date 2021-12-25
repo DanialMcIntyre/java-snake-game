@@ -4,9 +4,10 @@ import javax.swing.*;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
-    Timer timer = new Timer(125, this); //Set framerate (1000 = 1 frame/second)
+    final int framerate = 8;
+    Timer timer = new Timer(1000 / framerate, this); //Set framerate (1000 = 1 frame/second)
 
-    Player player = new Player(0, 0, 0, 25);
+    Player player = new Player(0, 0, 0, 25, 3);
 
     public GamePanel() {
     }
@@ -29,9 +30,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
 
         //Game logic
-        movePlayer();
-
-        wallCollision();
+        player.playerLogic();
 
         //Repaints screen (calls paint method)
         repaint();
@@ -46,55 +45,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
     //Draw player
     public void drawPlayer(Graphics g) {
+
+        //Player head
         g.setColor(Color.red);
-        g.fillRect(player.x, player.y, player.length, player.length);
-    }
+        g.fillRect(player.headx, player.heady, player.width, player.width);
 
-    /*
-    **************
-    Logic methods
-    **************
-    */
-
-    //Move player
-    public void movePlayer() {
-
-        //Move player in desired direction
-        if (player.direction == 0) {
-            player.x += player.length;
-        } else if (player.direction == 1) {
-            player.y += player.length;
-        } else if (player.direction == 2) {
-            player.x -= player.length;
-        } else if (player.direction == 3) {
-            player.y -= player.length;
+        //Player body
+        g.setColor(Color.green);
+        for (int i = 0; i < player.length; i++) {
+            g.fillRect(player.bodyx[i], player.bodyy[i], player.width, player.width);
         }
-
-    }
-
-    //Player collision with wall
-    public void wallCollision() {
-
-        if (player.x < 0) {
-            player.x = 500;
-            player.y = 375;
-        }
-
-        if (player.x > 1000 - player.length) {
-            player.x = 500;
-            player.y = 375;
-        }
-
-        if (player.y < 0) {
-            player.x = 500;
-            player.y = 375;
-        }
-
-        if (player.y > 740 - player.length) {
-            player.x = 500;
-            player.y = 375;
-        }
-
     }
 
     /*
