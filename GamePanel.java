@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
-    final int framerate = 8;
+    final int framerate = 10;
     Timer timer = new Timer(1000 / framerate, this); //Set framerate (1000 = 1 frame/second)
 
     Player player = new Player(0, 0, 0, 25, 3);
@@ -31,8 +31,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
 
         //Game logic
-        player.playerLogic();
-        player.length = apple.collision(player.headx, player.heady, player.length);
+        player.playerLogic(apple, apple.x, apple.y);
 
         //Repaints screen (calls paint method)
         repaint();
