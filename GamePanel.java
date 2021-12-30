@@ -19,6 +19,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         //Returns panel to original state, clearing the screen
         super.paint(g);
 
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 50)); 
+        g.drawString(String.valueOf(player.length - 3), 50, 50);
+
         //Draw stuff
         drawPlayer(g);
 
@@ -72,14 +75,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public void keyPressed(KeyEvent e) {
 
         //Choose player direction
-        if (e.getKeyCode() == KeyEvent.VK_W && player.direction != 1) {
-            player.direction = 3;          
-        } else if (e.getKeyCode() == KeyEvent.VK_D && player.direction != 2) {
-            player.direction = 0;
-        } else if (e.getKeyCode() == KeyEvent.VK_S && player.direction != 3) {
-            player.direction = 1;
-        } else if (e.getKeyCode() == KeyEvent.VK_A && player.direction != 0) {
-            player.direction = 2;
+        if (player.hasTurned == false) {
+            if (e.getKeyCode() == KeyEvent.VK_W && player.direction != 1) {
+                player.direction = 3;  
+                player.hasTurned = true;        
+            } else if (e.getKeyCode() == KeyEvent.VK_D && player.direction != 2) {
+                player.direction = 0;
+                player.hasTurned = true;  
+            } else if (e.getKeyCode() == KeyEvent.VK_S && player.direction != 3) {
+                player.direction = 1;
+                player.hasTurned = true;  
+            } else if (e.getKeyCode() == KeyEvent.VK_A && player.direction != 0) {
+                player.direction = 2;
+                player.hasTurned = true;  
+            }
         }
     }
 

@@ -17,6 +17,8 @@ public class Player {
 
     final int width;
 
+    boolean hasTurned = false;
+
     public Player(int x, int y, int direction, int width, int length) {
         this.headx = 500;
         this.heady = 375;
@@ -73,6 +75,8 @@ public class Player {
             bodyx[i] = oldx[i];
             bodyy[i] = oldy[i];
         }
+
+        hasTurned = false;
 
     }
 
